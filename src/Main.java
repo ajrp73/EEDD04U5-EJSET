@@ -22,18 +22,29 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         HashSet<String> hss= new HashSet<>();
-        HashSet<Integer> hsi= new HashSet<>();
 
+        System.out.println("hss empty: " + hss.isEmpty());  //Cjto vacio
         hss.add("Xiaomi");
-        Integer i1 = new Integer(1);
-        int i2=2;
-        hsi.add(i1);
+        System.out.println("hss empty: " + hss.isEmpty()); //Cjto NO vacio
+
         hss.add("Samsung");
         boolean b= hss.add("Oppo");
-        System.out.println("b: " + b);
+        System.out.println("b: " + b); //Devuelve true pq Oppo no estaba en el conjunto hss
+
+        b= hss.add("Oppo");
+        System.out.println("b: " + b); //Devuelve false pq Oppo ya estaba en el conjunto hss
+System.exit(0);
+
+        HashSet<Integer> hsi= new HashSet<>();
+        Integer i1 = 1;
+
+        int i2=2;
+        hsi.add(i1);
+
+
+
         
         System.out.println("hss size: " + hss.size());
-        System.out.println("hss empty: " + hss.isEmpty());
         System.out.println("hss contains hola?: " + hss.contains("Hola"));
         System.out.println("hss contains Oppo?: " + hss.contains("Oppo"));
         
@@ -74,7 +85,7 @@ public class Main {
         
         TreeSet<Integer> tsi = new TreeSet<>();
         
-        tsi.add(new Integer(40));
+        tsi.add(40);
         tsi.add(25);
         tsi.add((int)28.9);
         tsi.add(1);

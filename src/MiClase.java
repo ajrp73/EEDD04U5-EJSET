@@ -7,10 +7,16 @@ public class MiClase {
         ac= "";
     }
 
-    public MiClase(int aip, String acp){
-        ai= aip;
-        ac= acp;
+    public MiClase(int aip, String acp) {
+        ai = aip;
+        ac = acp;
     }
+    public MiClase(String aic, int aip){
+        ai= 20*aip;
+        ac= aic;
+    }
+
+    // mc = new MiClase(2, "pepe")
 
     public MiClase(int aip1, int aip2, String acp1, String acp2){
         ai= aip1 + aip2;
