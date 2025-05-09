@@ -26,24 +26,20 @@ public class Main {
         System.out.println("hss empty: " + hss.isEmpty());  //Cjto vacio
         hss.add("Xiaomi");
         System.out.println("hss empty: " + hss.isEmpty()); //Cjto NO vacio
+        System.out.println("size: " + hss.size()); //1
+
 
         hss.add("Samsung");
+        System.out.println("size: " + hss.size()); //2
         boolean b= hss.add("Oppo");
+        System.out.println("size: " + hss.size()); //3
         System.out.println("b: " + b); //Devuelve true pq Oppo no estaba en el conjunto hss
 
         b= hss.add("Oppo");
         System.out.println("b: " + b); //Devuelve false pq Oppo ya estaba en el conjunto hss
-System.exit(0);
-
-        HashSet<Integer> hsi= new HashSet<>();
-        Integer i1 = 1;
-
-        int i2=2;
-        hsi.add(i1);
+        System.out.println("size: " + hss.size()); //3 ya que no vuelve a añadir Oppo
 
 
-
-        
         System.out.println("hss size: " + hss.size());
         System.out.println("hss contains hola?: " + hss.contains("Hola"));
         System.out.println("hss contains Oppo?: " + hss.contains("Oppo"));
@@ -56,7 +52,21 @@ System.exit(0);
         b= hss.add("Oppo");
         System.out.println("b: " + b);
         System.out.println(hss);
-        
+
+        HashSet<Integer> hsi= new HashSet<>();
+        Integer i1 = 1;
+        int i2=2;
+        hsi.add(i1);
+        hsi.add(i2);
+        System.out.println("hsi size: " + hsi.size());
+        System.out.println("hsi: " + hsi.toString());
+
+        System.exit(0);
+        //TODO: Comprobar que LinkedHashSet mantiene orden y HashSet no lo hace
+        //TODO: La comprobación se realiza obteniendo un Iterador
+
+
+
         LinkedHashSet<MiClase> lhs = new LinkedHashSet<>();
         MiClase mc1= new MiClase();
         MiClase mc2= new MiClase(5, "seis");
