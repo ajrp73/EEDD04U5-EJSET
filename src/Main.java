@@ -40,7 +40,6 @@ public class Main {
         System.out.println("size: " + hss.size()); //3 ya que no vuelve a añadir Oppo
 
 
-        System.out.println("hss size: " + hss.size());
         System.out.println("hss contains hola?: " + hss.contains("Hola"));
         System.out.println("hss contains Oppo?: " + hss.contains("Oppo"));
         
@@ -49,41 +48,46 @@ public class Main {
         }else{
             System.out.println("hss doesn't contain Oppo1");
         }
-        b= hss.add("Oppo");
-        System.out.println("b: " + b);
-        System.out.println(hss);
+
+        System.out.println("hss completo: " + hss);
 
         HashSet<Integer> hsi= new HashSet<>();
-        Integer i1 = 1;
-        int i2=2;
+        Integer i1 = Integer.valueOf(1); //podemos incorporar elementos como objetos de la clase Integer
+        int i2=2;  // o directamente como variables del tipo primitivo int
         hsi.add(i1);
         hsi.add(i2);
         System.out.println("hsi size: " + hsi.size());
         System.out.println("hsi: " + hsi.toString());
 
-        System.exit(0);
+
         //TODO: Comprobar que LinkedHashSet mantiene orden y HashSet no lo hace
         //TODO: La comprobación se realiza obteniendo un Iterador
 
 
-
         LinkedHashSet<MiClase> lhs = new LinkedHashSet<>();
         MiClase mc1= new MiClase();
-        MiClase mc2= new MiClase(5, "seis");
-        MiClase mc3= new MiClase(5, 8, "seis", "ocho");
+        MiClase mc2= new MiClase(6, "seis");
+        MiClase mc3= new MiClase(6, 8, "seis", "ocho");
         
         lhs.add(mc1);
         lhs.add(mc2);
         lhs.add(mc3);
-        //lhs.add(new Integer(2));
+        //lhs.add( Integer.valueOf(1))); //Hay que sumistrar un objeto de tipo MiClase
         
         System.out.println(lhs);
-        
-        lhs.add(mc3);
+
+        System.out.println("Intento añadir de nuevo mc3: " + lhs.add(mc3));
         System.out.println(lhs);
         lhs.add(new MiClase());
         System.out.println(lhs);
-        
+
+        MiClase mc31= new MiClase(6, 8, "seis", "ocho");
+
+        //Dado que MiClase no tiene método compareTo, la comparación se realiza a nivel de referencia.
+        //Como se trata de dos instancias diferentes (aunque con los mismos valores) sus referencias
+        //son distintas
+        System.out.println("Resultado de comparar dos objetos MiClase iguales: " + mc3.equals(mc31)); //false
+
         //Incrementar en uno el atributo ai de todos los
         //elementos del conjunto lhs
         Iterator<MiClase> imc= lhs.iterator();
@@ -92,6 +96,8 @@ public class Main {
             e.setAi(e.getAi()+1);
         }
         System.out.println(lhs);
+
+
         
         TreeSet<Integer> tsi = new TreeSet<>();
         
@@ -105,9 +111,10 @@ public class Main {
         
         
         System.out.println(tsi);
-        System.out.println("menor: " + tsi.floor(2));
+        System.out.println("menor: " + tsi.floor(3));
         System.out.println("menor: " + tsi.ceiling(26));
         System.out.println("menor: " + tsi.first());
+
 
         Iterator<Integer> itsi= tsi.iterator();
         int suma=0;
@@ -118,6 +125,7 @@ public class Main {
         }
         System.out.println(tsi);
         System.out.println("Suma: " + suma);
+
         
         TreeSet<MiClase> tsmc = new TreeSet<>();
        
@@ -126,13 +134,18 @@ public class Main {
         MiClase mc4= new MiClase(1, "siete");
   
         
-        /*
-        tsmc.add(mc4);
+
+       /* tsmc.add(mc4);
         tsmc.add(mc5);
         tsmc.add(mc6);
         System.out.println(tsmc);
+
+        //No es posible añadir objetos de MiClase a un TreeSet ya que éste precisa del método
+        //compareTo para poder comparar dos instancias y, así, insertalas en orden en el árbol
+        //Dado que MiClase carece del método compareTo se precisa añadir un objeto Comparator
+
         */
-        
+
         System.out.println("Estructura tsmc2: ");
         TreeSet<MiClase> tsmc2 = new TreeSet<>(Comparator.comparingInt(MiClase::getAi));
         tsmc2.add(mc6);
@@ -140,24 +153,28 @@ public class Main {
         tsmc2.add(mc4);
         System.out.println(tsmc2);
 
-        
+
+        //Comprobamos como podemos añadir a TreeSet objetos de una clase Comparable
         MiClase2 mc26= new MiClase2(15, "ocho");
         MiClase2 mc25= new MiClase2(5, "seis");
         MiClase2 mc24= new MiClase2(1, "siete");
+        MiClase2 mc241= new MiClase2(1, "siete");
+
+        System.out.println("Resultado de comparar dos objetos MiClase2 iguales: " + mc24.compareTo(mc241)); //true
 
         
         TreeSet<MiClase2> tsmc3 = new TreeSet<>();
         tsmc3.add(mc26);
         tsmc3.add(mc25);
         tsmc3.add(mc24);
+        tsmc3.add(mc241); //No se añade porque existe un objeto igual en el TreeSet
         System.out.println("Estructura tsmc3: ");
         System.out.println(tsmc3);
-  
-    
-        
-        MiClase3 mc36= new MiClase3(15, "uno");
-        MiClase3 mc361= new MiClase3(16, "uno");
 
+        
+        MiClase3 mc36= new MiClase3(150, "uno");
+        MiClase3 mc361= new MiClase3(16, "uno"); //No se inserta
+        MiClase3 mc362= new MiClase3(16, "dos"); //No se inserta
         MiClase3 mc35= new MiClase3(5, "seis");
         MiClase3 mc34= new MiClase3(1, "siete");
         
@@ -167,9 +184,11 @@ public class Main {
         tsmc4.add(mc35);
         tsmc4.add(mc36);
         tsmc4.add(mc361);
+        tsmc4.add(mc362);
         System.out.println("Estructura tsmc4: ");
         System.out.println(tsmc4);
-  
+
+
         MiClase4 mc42= new MiClase4(11, "Pepe!!!!!!!!");
         MiClase4 mc43= new MiClase4(11, "Pepito");
         MiClase4 mc41= new MiClase4(11, "Pepito grillo");
